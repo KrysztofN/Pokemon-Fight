@@ -1,3 +1,5 @@
+#ifndef POKEMON_H
+#define POKEMON_H
 
 #include <string>
 
@@ -21,3 +23,4 @@ public:
     void run_away();
 };
 
+#endif // POKEMON_H
