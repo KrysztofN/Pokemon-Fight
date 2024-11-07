@@ -1,2 +1,2 @@
-# Pokemon-Fight
+# Pokemon-Fight !!!Under Construction!!
 Pokemon fighting game
