@@ -8,16 +8,6 @@
 #include <iomanip>
 #include "../utils/utils.cpp"
 
-void displayLoadingBar(const std::string& message){
-    std::cout << message;
-    for(int i = 0; i<20; i++){
-        std::cout << " ";
-        std::cout.flush();
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    }
-    std::cout << "Done !" << std::endl;
-    std::this_thread::sleep_for(std::chrono::milliseconds(500));
-}
 
 int main(){
     clearScreen();
@@ -54,6 +44,9 @@ int main(){
                 trainer.delete_pokemon();
                 break;
             case 3:
+                trainer.view_pokemon();
+                break;
+            case 4:
                 return 0;
             default:
                 std::cout << "Invalid choice!" << std::endl;

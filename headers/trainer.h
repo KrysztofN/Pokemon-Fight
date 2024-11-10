@@ -19,6 +19,7 @@ class Trainer{
     void add_pokemon();
     void delete_pokemon();
     void view_pokemon();
+    void train_pokemon();
 
     Trainer() : pokemon_count(0), power(0) {}
 

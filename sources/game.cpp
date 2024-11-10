@@ -131,3 +131,8 @@ void Trainer::view_pokemon(){
     }
 
 }
+
+void Trainer::train_pokemon(){
+    clearScreen();
+    // Update statistics, charge the trainer with pokemoney
+}
