@@ -112,6 +112,22 @@ void Trainer::delete_pokemon(){
 
 void Trainer::view_pokemon(){
     clearScreen();
+    if(pokemon_count == 0){
+        std::cout << "You don't have any pokemon yet!" << std::endl;
+        return;
+    }
 
+    std::cout << "\n=== Your Pokemon Team ===" << std::endl;
+    for(int i = 0; i < pokemon_count; i++){
+        std::cout << "\nPokemon #" << i + 1 << std::endl;
+        std::cout << "Name: " << pokemon[i].name << std::endl;
+        std::cout << "Type: " << pokemon[i].type1;
+        if (!pokemon[i].type2.empty()) std::cout << "/" << pokemon[i].type2;
+        std::cout << "\nHP: " << pokemon[i].hp << std::endl;
+        std::cout << "Attack: " << pokemon[i].attack << std::endl;
+        std::cout << "Defense: " << pokemon[i].defense << std::endl;
+        std::cout << "Speed: " << pokemon[i].speed << std::endl;
+        std::cout << "------------------------" << std::endl;
+    }
 
 }
