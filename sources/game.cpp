@@ -63,7 +63,6 @@ void Trainer::add_pokemon(){
     std::cout << "Enter pokemon name: ";
     std::getline(std::cin, pokemon_name);
 
-    // convert to lower-case
     std::transform(pokemon_name.begin(), pokemon_name.end(), pokemon_name.begin(), ::tolower);
 
     Pokemon* new_pokemon = read_pokemon_from_database(pokemon_name);
@@ -72,7 +71,7 @@ void Trainer::add_pokemon(){
         pokemon.push_back(*new_pokemon);
         pokemon_count++;
         delete new_pokemon;
-        std::cout<< "Hurray! You cached " << pokemon_name << "!" << std::endl;
+        std::cout<< "Hurray! You catched " << pokemon_name << "!" << std::endl;
     }
     else{
         std::cout << "Pokemon not found! Or it has mightfuly tricked you not to see it..." << std::endl;
