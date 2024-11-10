@@ -4,14 +4,27 @@
 #include <fstream>
 #include <cstdlib>
 
+void clearScreen(){
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
+}
 
 int main(){
+    clearScreen();
     Trainer trainer;
     int choice;
 
-    std::cout << "Enter trainer name: ";
+    std::cout << "=== Welcome to PokemonAdcenture ===";
+    std::cout << "\nEnter trainer name: ";
     std::getline(std::cin, trainer.name);
-    std::cout << "Enter trainer ability category [Body, Mind, Spirit]: ";
+
+    std::cout << "\nChoose trainer ability category: ";
+    std::cout << "1. Body (Acrobatics, Athletics, Combat)" << std::endl;
+    std::cout << "2. Mind (Education, Technology, Perception)" << std::endl;
+    std::cout << "3. Spirit (Charm, Command, Focus)" << std::endl;
     std::getline(std::cin, trainer.ability_category);
     // The Body Skills are Acrobatics, Athletics, Combat, Intimidate, Stealth, and Survival.
     // The Mind Skills are General Education, Medicine Education, Occult Education, Pokémon Education, Technology Eduction, Guile, and Perception.
@@ -29,12 +42,15 @@ int main(){
 
             case 1:
                 trainer.add_pokemon();
+                break;
             case 2:
                 trainer.delete_pokemon();
+                break;
             case 3:
                 return 0;
             default:
                 std::cout << "Invalid choice!" << std::endl;
+                break;
         }
     }
     
