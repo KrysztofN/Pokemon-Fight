@@ -18,8 +18,14 @@ class Trainer{
     void fight();
     void add_pokemon();
     void delete_pokemon();
+    void view_pokemon();
 
     Trainer() : pokemon_count(0), power(0) {}
+
+    private:
+        int money = 1000;
+        int badges = 0;
+        std::string rank = "Novice";
 };
 
 #endif // TRAINER_H

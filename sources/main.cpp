@@ -6,14 +6,7 @@
 #include <thread>
 #include <chrono>
 #include <iomanip>
-
-void clearScreen(){
-    #ifdef _WIN32
-        system("cls");
-    #else
-        system("clear");
-    #endif
-}
+#include "../utils/utils.cpp"
 
 void displayLoadingBar(const std::string& message){
     std::cout << message;

@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../headers/pokemon.h"
 #include "../headers/trainer.h"
+#include "../utils/utils.cpp"
 #include <fstream>
 #include <cstdlib>
 #include <vector>
@@ -106,5 +107,11 @@ void Trainer::delete_pokemon(){
     pokemon_count--;
 
     std::cout << deleted_name << " has been removed from your team!" << std::endl;
+
+}
+
+void Trainer::view_pokemon(){
+    clearScreen();
+
 
 }
