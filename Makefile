@@ -15,4 +15,12 @@ run: $(TARGET)
 clean:
 	rm -f $(TARGET)
 
+g:
+	git add .
+	git commit -m "$(filter-out $@,$(MAKECMDGOALS))"
+	git push -u origin main
+
+%:
+	@:
+
 .PHONY: build clean

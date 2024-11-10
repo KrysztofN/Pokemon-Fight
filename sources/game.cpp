@@ -71,9 +71,40 @@ void Trainer::add_pokemon(){
         pokemon.push_back(*new_pokemon);
         pokemon_count++;
         delete new_pokemon;
-        std::cout<< "Hurray! You catched " << pokemon_name << "!" << std::endl;
+        std::cout<< "Hurray! You added " << pokemon_name << "to your team!" << std::endl;
     }
     else{
         std::cout << "Pokemon not found! Or it has mightfuly tricked you not to see it..." << std::endl;
     }
+}
+
+void Trainer::delete_pokemon(){
+    if(pokemon_count == 0){
+        std::cout << "No Pokemon to delete! "<< std::endl;
+        return;
+    }
+
+    std::cout << "Current Deck: " << std::endl;
+    for(int i=0; i < pokemon_count; i++){
+        std::cout << i+1 << ". " << pokemon[i].name << std::endl;
+    }
+
+    int choice;
+    std::cout << "Enter the number of the Pokemon to delete (1 - " << pokemon_count << "): ";
+    std::cin >> choice;
+
+    if(choice < 1 || choice > pokemon_count){
+        std::cout << "Invalid selection!" << std::endl;
+        return;
+    }
+
+    int index = choice - 1;
+
+    std::string deleted_name = pokemon[index].name;
+
+    pokemon.erase(pokemon.begin() + index);
+    pokemon_count--;
+
+    std::cout << deleted_name << " has been removed from your team!" << std::endl;
+
 }

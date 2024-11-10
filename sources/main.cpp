@@ -5,8 +5,6 @@
 #include <cstdlib>
 
 
-using namespace std;
-
 int main(){
     Trainer trainer;
     int choice;
@@ -32,6 +30,8 @@ int main(){
             case 1:
                 trainer.add_pokemon();
             case 2:
+                trainer.delete_pokemon();
+            case 3:
                 return 0;
             default:
                 std::cout << "Invalid choice!" << std::endl;
