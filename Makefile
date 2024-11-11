@@ -1,8 +1,8 @@
 CXX = g++
 
-SRCS = sources/main.cpp sources/game.cpp
+SRCS = sources/main.cpp sources/game.cpp sources/utils.cpp
 
-HEADERS = headers/pokemon.h headers/trainer.h
+HEADERS = headers/pokemon.h headers/trainer.h headers/utils.h
 
 TARGET = game
 

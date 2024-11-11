@@ -1,7 +1,7 @@
 #include <iostream>
 #include "../headers/pokemon.h"
 #include "../headers/trainer.h"
-#include "../utils/utils.cpp"
+#include "../headers/utils.h"
 #include <fstream>
 #include <cstdlib>
 #include <vector>

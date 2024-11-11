@@ -6,7 +6,7 @@
 #include <thread>
 #include <chrono>
 #include <iomanip>
-#include "../utils/utils.cpp"
+#include "../headers/utils.h"
 
 
 int main(){
