@@ -59,6 +59,7 @@ Pokemon* read_pokemon_from_database(const std::string& pokemon_name){
     file.close();
     return nullptr;
 }
+
 void Trainer::add_pokemon(){
     std::string pokemon_name;
     std::cout << "Enter pokemon name: ";
@@ -134,5 +135,32 @@ void Trainer::view_pokemon(){
 
 void Trainer::train_pokemon(){
     clearScreen();
-    // Update statistics, charge the trainer with pokemoney
+    if(pokemon_count == 0){
+        std::cout << "No Pokemon to train!" << std::endl;
+        return;
+    }
+
+    std::cout << "Choose a Pokemon to train: \n";
+    for(int i = 0; i < pokemon_count; i++){
+        std::cout << i + 1 << pokemon[i].name << std::endl;
+    }
+
+    int choice;
+    std::cin >> choice;
+
+    if(choice < 1 || choice > pokemon_count){
+        std::cout << "Invalid selection!" << std::endl;
+        return;
+    }
+
+    int index = choice - 1;
+    Pokemon& selected_pokemon = pokemon[index];
+
+    selected_pokemon.hp += 10;
+    selected_pokemon.attack += 5;
+    selected_pokemon.defense += 5;
+    selected_pokemon.speed += 3;
+
+    std::cout << selected_pokemon.name << "has completed training!\n";
+    std::cout << "Stats increased!\n";
 }
