@@ -8,6 +8,19 @@
 #include <iomanip>
 #include "../headers/utils.h"
 
+void displayWelcomeBanner() {
+    std::cout << R"(
+    ██████╗  ██████╗ ██╗  ██╗███████╗███╗   ███╗ ██████╗ ███╗   ██╗
+    ██╔══██╗██╔═══██╗██║ ██╔╝██╔════╝████╗ ████║██╔═══██╗████╗  ██║
+    ██████╔╝██║   ██║█████╔╝ █████╗  ██╔████╔██║██║   ██║██╔██╗ ██║
+    ██╔═══╝ ██║   ██║██╔═██╗ ██╔══╝  ██║╚██╔╝██║██║   ██║██║╚██╗██║
+    ██║     ╚██████╔╝██║  ██╗███████╗██║ ╚═╝ ██║╚██████╔╝██║ ╚████║
+    ╚═╝      ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+    )" << '\n';
+    std::cout << "=================== ADVENTURE AWAITS! ===================\n\n";
+}
+
+
 
 int main(){
     clearScreen();
@@ -18,7 +31,7 @@ int main(){
     std::cout << "\nEnter trainer name: ";
     std::getline(std::cin, trainer.name);
 
-    std::cout << "\nChoose trainer ability category: ";
+    std::cout << "\nChoose trainer ability category: \n";
     std::cout << "1. Body (Acrobatics, Athletics, Combat)" << std::endl;
     std::cout << "2. Mind (Education, Technology, Perception)" << std::endl;
     std::cout << "3. Spirit (Charm, Command, Focus)" << std::endl;
