@@ -189,3 +189,15 @@ void Game::initialize_bosses(){
         }
     }
 };
+
+float Game::calculate_type_multiplier(const std::string& attacker_type, const std::string& defender_type){
+    // TODO adjust the return values based on type
+    if(attacker_type == "water" && defender_type == "fire") return 2.0f;
+    if(attacker_type == "fire" && defender_type == "grass") return 2.0f;
+    if(attacker_type == "grass" && defender_type == "water") return 2.0f;
+    if(attacker_type == "electric" && defender_type == "water") return 2.0f;
+    if(attacker_type == "ground" && defender_type == "electric") return 2.0f;
+    if(attacker_type == "psychic" && defender_type == "fighting") return 2.0f;
+    if(attacker_type == defender_type) return 0.5f;
+    return 1.0f;
+}
