@@ -2,6 +2,8 @@
 #include "../headers/pokemon.h"
 #include "../headers/trainer.h"
 #include "../headers/utils.h"
+#include "../headers/game.h"
+#include "../headers/boss.h"
 #include <fstream>
 #include <cstdlib>
 #include <vector>
@@ -164,3 +166,26 @@ void Trainer::train_pokemon(){
     std::cout << selected_pokemon.name << "has completed training!\n";
     std::cout << "Stats increased!\n";
 }
+
+void Game::initialize_bosses(){
+    std::vector<std::pair<std::string, std::string>> boss_configs = {
+        {"Charizard" , "Dragon Tamer"},
+        {"Mewtwo" , "Psychic Master"},
+        {"Gyardos" , "Terror of Waters"},
+        {"Drygonite" , "Hell Fire"},
+        {"Gengar" , "Some Random Dude IDK"},
+    };
+
+    current_boss = 0;
+    int level = 1;
+
+    for(const auto& config : boss_configs){
+        Pokemon* boss_pokemon = read_pokemon_from_database(config.first);
+        if(boss_pokemon){
+            bosses.emplace_back(*boss_pokemon, level, config.second, "A powerful trainer specializing in " + boss_pokemon->type1 + " type Pokemon");
+        
+            delete boss_pokemon;
+            level++;
+        }
+    }
+};
