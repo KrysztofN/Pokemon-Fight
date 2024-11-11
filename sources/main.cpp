@@ -31,46 +31,88 @@ void slowPrint(const std::string& text, int delay = 30){
 
 int main(){
     clearScreen();
-    Trainer trainer;
-    int choice;
+    displayWelcomeBanner();
 
-    std::cout << "=== Welcome to PokemonAdcenture ===";
-    std::cout << "\nEnter trainer name: ";
+    Trainer trainer;
+    std::string input;
+
+    slowPrint("Welcome, future Pokemon Master! What is your name?");
     std::getline(std::cin, trainer.name);
 
-    std::cout << "\nChoose trainer ability category: \n";
-    std::cout << "1. Body (Acrobatics, Athletics, Combat)" << std::endl;
-    std::cout << "2. Mind (Education, Technology, Perception)" << std::endl;
-    std::cout << "3. Spirit (Charm, Command, Focus)" << std::endl;
-    std::getline(std::cin, trainer.ability_category);
-    // The Body Skills are Acrobatics, Athletics, Combat, Intimidate, Stealth, and Survival.
-    // The Mind Skills are General Education, Medicine Education, Occult Education, Pokémon Education, Technology Eduction, Guile, and Perception.
-    // The Spirit Skills are Charm, Command, Focus, and Intuition.
-    std::cout << "Enter trainer special ability: ";
-    std::getline(std::cin, trainer.ability);
+    clearScreen();
+    slowPrint("Welcome, " + trainer.name + "! Choose your specialiaztion: ");
+    std::cout << "\n1. Body (Acrobatics, Athletics, Combat)" << std::endl;
+    std::cout << "   - Strengths: Combat, Athletics, Survival" << std::endl;
+    std::cout << "   - Special: 20% boost to Pokemon's physical attacks" << std::endl;
 
-    //calculate trainer power
-    while(true){
-        std::cout << "\n1. Add pokemon\n2. Exit\nChoice: ";
+    std::cout << "2. Mind (Education, Technology, Perception)" << std::endl;
+    std::cout << "   - Strengths: Strategy, Technology, Education" << std::endl;
+    std::cout << "   - Special: 15% boost to Pokemon's defense and special defense" << std::endl;
+
+    std::cout << "3. Spirit (Charm, Command, Focus)" << std::endl;
+    std::cout << "   - Strengths: Charm, Focus, Intuition" << std::endl;
+    std::cout << "   - Special: 10% boost to all Pokemon's stats" << std::endl;
+
+    int specialization;
+    do{
+        std::cout << "\nEnter your choice (1-3): ";
+        std::cin >> specialization;
+    } while (specialization < 1 || specialization > 3);
+    std::cin.ignore();
+
+    switch(specialization){
+        case 1: trainer.ability_category = "Body Master"; break;
+        case 2: trainer.ability_category = "Mind Master"; break;
+        case 3: trainer.ability_category = "Spirit Master"; break;
+    }
+
+    clearScreen();
+    slowPrint("Before starting your journey, you need to build your team!");
+    slowPrint("You can have up to 5 Pokemon. Choose wisely...");
+
+    bool startAdventure = false;
+    while (!startAdventure){
+        std::cout << "\nCurrent team size: " << trainer.pokemon_count << "/5\n";
+        std::cout << "\n1. Add Pokemon to team";
+        std::cout << "\n2. View current team";
+        std::cout << "\n3. Remove Pokemon from team";
+        std::cout << "\n4. Start Adventure!" << std::endl;
+
+        int choice;
+        std::cout << "Enter your choice: ";
         std::cin >> choice;
         std::cin.ignore();
 
         switch (choice){
-
             case 1:
-                trainer.add_pokemon();
+                if(trainer.pokemon_count < 5){
+                    trainer.add_pokemon();
+                } else {
+                    slowPrint("Your team is full! Remove a Pokemon first or start the adventure.");
+                }
                 break;
             case 2:
-                trainer.delete_pokemon();
+                trainer.view_pokemon();
+                std::cout << "\nPress Enter to continue...";
+                std::getline(std::cin, input);
+                clearScreen();
                 break;
             case 3:
-                trainer.view_pokemon();
+                if(trainer.pokemon_count <= 0){
+                    std::cout << "You don't have any Pokemon to delete!";
+                } else{
+                    trainer.delete_pokemon();
+                }
                 break;
             case 4:
-                return 0;
+                if(trainer.pokemon_count > 0){
+                    startAdventure = true;
+                } else {
+                    slowPrint("You need at least one Pokemon to start your adventure!");
+                }
+
             default:
-                std::cout << "Invalid choice!" << std::endl;
-                break;
+                std::cout << "Invalid choice! Please try again" << std::endl;
         }
     }
     
