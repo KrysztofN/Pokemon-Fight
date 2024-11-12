@@ -9,6 +9,9 @@
 #include <vector>
 #include <sstream>
 #include <algorithm>
+#include <random>
+#include <chrono>
+#include <thread>
 
 Pokemon* read_pokemon_from_database(const std::string& pokemon_name){
     std::ifstream file("./assets/pokemon.csv");
@@ -200,4 +203,33 @@ float Game::calculate_type_multiplier(const std::string& attacker_type, const st
     if(attacker_type == "psychic" && defender_type == "fighting") return 2.0f;
     if(attacker_type == defender_type) return 0.5f;
     return 1.0f;
+}
+
+void Game::battle_turn(Pokemon& attacker, Pokemon& defender, const std::string& attacker_name){
+    std::random_device rd; // seed
+    std::mt19937 gen(rd()); // seed random number generator
+    std::uniform_int_distribution<> damage_var(85, 100);
+    std::uniform_int_distribution<> critic_chance(1, 100);
+
+    // Calculate the damage with type effectivenes
+    float type_multiplier = calculate_type_multiplier(attacker.type1, attacker.type2);
+
+    // Critical his system (10% chance)
+    bool is_critical = critic_chance(gen) <= 10;
+    float critical_multiplier = is_critical ? 1.5f : 1.0f;
+
+    int damage = static_cast<int>((attacker.attack * type_multiplier * critical_multiplier * damage_var(gen)/100.0f) - (defender.defense / 2));
+
+    damage = std::max(1, damage); // Min 1 damage
+
+    defender.hp -= damage;
+    defender.hp = std::max(0, defender.hp); // Preventing negative hp
+
+    std::cout << attacker_name << "'s " << attacker.name << " deals " << damage << " damage!";
+    if(is_critical) std::cout << "Critical hit!";
+    if(type_multiplier > 1.0f) std::cout << "It's super effective!";
+    if(type_multiplier < 1.0f) std::cout << "It's not very effective...";
+    std::cout << "\n";
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 }
