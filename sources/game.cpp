@@ -233,3 +233,48 @@ void Game::battle_turn(Pokemon& attacker, Pokemon& defender, const std::string& 
 
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 }
+
+void Game::start_game() {
+    clearScreen();
+    initialize_bosses();
+
+    std::cout << "Welcome to Pokemon Adventure, " <<trainer.name << "!\n";
+    std::cout << "You must defeat " << bosses.size() << "powerful bosses to become a Pokemon Master!\n\n";
+
+    while(current_boss < bosses.size()){
+        Boss& current_boss_battle = bosses[current_boss];
+        std::cout << "\n===BOSS BATTLE " << (current_boss + 1) << " ===\n";
+        std::cout << "Opponent: " << current_boss_battle.name << "\n";
+        std::cout << current_boss_battle.description << "\n\n";
+
+        bool boss_defeated = battle_boss(current_boss_battle);
+
+        if(!boss_defeated){
+            std::cout << "\nGame Over! You were defeated by " << current_boss_battle.name << "!\n";
+            return;
+        }
+
+        current_boss++;
+        trainer.power += 100;
+
+        if (current_boss < bosses.size()) {
+            std::cout << "\nVictory! Prepare for your next challange!\n";
+
+            // Heal the pokemon between battles ?
+            for(auto& p : trainer.pokemon){
+                p.hp = p.total;
+            }
+
+            // train?
+            char choice;
+            std::cout << "Would you like to train you Pokemon before the next battle? (y/n): ";
+            std::cin >> choice;
+            if(choice == 'y' || choice == 'Y'){
+                trainer.train_pokemon();
+            }
+        }
+    }
+
+    std::cout << "Congratulation! You've defeated all bosses and become the Pokemon Champion!\n";
+    std::cout << "Final Power Level: " << trainer.power << "\n";
+}
