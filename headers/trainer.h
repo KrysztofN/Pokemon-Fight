@@ -21,7 +21,7 @@ class Trainer{
     void view_pokemon();
     void train_pokemon();
 
-    Trainer() : pokemon_count(0), power(0) {}
+    Trainer() : pokemon_count(0), power(0) {};
 
     private:
         int money = 1000;

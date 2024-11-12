@@ -8,26 +8,6 @@
 #include <iomanip>
 #include "../headers/utils.h"
 
-void displayWelcomeBanner() {
-    std::cout << R"(
-    ██████╗  ██████╗ ██╗  ██╗███████╗███╗   ███╗ ██████╗ ███╗   ██╗
-    ██╔══██╗██╔═══██╗██║ ██╔╝██╔════╝████╗ ████║██╔═══██╗████╗  ██║
-    ██████╔╝██║   ██║█████╔╝ █████╗  ██╔████╔██║██║   ██║██╔██╗ ██║
-    ██╔═══╝ ██║   ██║██╔═██╗ ██╔══╝  ██║╚██╔╝██║██║   ██║██║╚██╗██║
-    ██║     ╚██████╔╝██║  ██╗███████╗██║ ╚═╝ ██║╚██████╔╝██║ ╚████║
-    ╚═╝      ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
-    )" << '\n';
-    std::cout << "=================== ADVENTURE AWAITS! ===================\n\n";
-}
-
-void slowPrint(const std::string& text, int delay = 30){
-    for(char c: text){
-        std::cout << c << std::flush;
-        std::this_thread::sleep_for(std::chrono::milliseconds(delay));
-    }
-    std::cout << std::endl;
-}
-
 
 int main(){
     clearScreen();
