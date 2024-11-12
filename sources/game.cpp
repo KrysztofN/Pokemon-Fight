@@ -278,3 +278,51 @@ void Game::start_game() {
     std::cout << "Congratulation! You've defeated all bosses and become the Pokemon Champion!\n";
     std::cout << "Final Power Level: " << trainer.power << "\n";
 }
+
+bool Game::battle_boss(Boss& boss){
+    Pokemon boss_pokemon = boss.pokemon;
+    int active_pokemon_index = 0;
+
+    while(true){
+        // check if player has any left Pokemon
+        if(active_pokemon_index >= trainer.pokemon_count){
+            std::cout << "You have no more Pokemon available to battle!\n";
+            return false;
+        }
+
+        Pokemon& player_pokemon = trainer.pokemon[active_pokemon_index];
+
+        std::cout << "\nYour " << player_pokemon.name << " (HP: " << player_pokemon.hp
+            << ") vs " << boss_pokemon.name << " (HP: " << boss_pokemon.hp << ")\n";
+
+        if(player_pokemon.speed >= boss_pokemon.speed){
+            battle_turn(player_pokemon, boss_pokemon, "You");
+            if(boss_pokemon.hp <= 0){
+                std::cout << "\nBoss " << boss.name << " has been defeated!\n";
+                return true;
+            }
+
+            battle_turn(boss_pokemon, player_pokemon, "Boss");
+        } else {
+            battle_turn(boss_pokemon, player_pokemon, "Boss");
+            if(player_pokemon.hp <= 0){
+                std::cout << "\nYour " << player_pokemon.name << " has fainted!\n";
+                active_pokemon_index++;
+                continue;
+            }
+
+            battle_turn(player_pokemon, boss_pokemon, "You");
+        }
+
+        // Check battle results
+        if(boss_pokemon.hp <= 0){
+            std::cout << "\nBoss " << boss.name << " has been defeated!\n";
+            return true;
+        }
+
+        if (player_pokemon.hp <= 0){
+            std::cout << "\nYour " << player_pokemon.name << " has fainted!\n";
+            active_pokemon_index++;
+        }
+    }
+}
